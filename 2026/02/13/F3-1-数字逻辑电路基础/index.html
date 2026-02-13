@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>F3.1 数字逻辑电路基础 | plusone's blog</title><meta name="author" content="Jiayi Li"><meta name="copyright" content="Jiayi Li"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这是“一生一芯”项目的一个beginning，千里之行始于足下，希望能够通过自己的学习和体会，在下个学期末之前完成流片。如果我的数电的大作业最后是自己搭的一个芯片，我真的觉得那样酷毙了，learn for fun。 处理器本质上是数字电路，而数字电路是用来处理数字信号的电路，而数字信号简单来说就是指0和1这样两种练得信号。0和1并不是数字意义的自然数的前两位，而是电路的高电平和低电平的两种不同的状">
+<meta property="og:type" content="article">
+<meta property="og:title" content="F3.1 数字逻辑电路基础">
+<meta property="og:url" content="http://example.com/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="plusone&#39;s blog">
+<meta property="og:description" content="这是“一生一芯”项目的一个beginning，千里之行始于足下，希望能够通过自己的学习和体会，在下个学期末之前完成流片。如果我的数电的大作业最后是自己搭的一个芯片，我真的觉得那样酷毙了，learn for fun。 处理器本质上是数字电路，而数字电路是用来处理数字信号的电路，而数字信号简单来说就是指0和1这样两种练得信号。0和1并不是数字意义的自然数的前两位，而是电路的高电平和低电平的两种不同的状">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png">
+<meta property="article:published_time" content="2026-02-13T03:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-13T03:33:47.896Z">
+<meta property="article:author" content="Jiayi Li">
+<meta property="article:tag" content="学习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "F3.1 数字逻辑电路基础",
+  "url": "http://example.com/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/",
+  "image": "https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png",
+  "datePublished": "2026-02-13T03:00:00.000Z",
+  "dateModified": "2026-02-13T03:33:47.896Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jiayi Li",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'F3.1 数字逻辑电路基础',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/flink/"><i class="fa-fw fas fa-link"></i><span> 好友链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">plusone's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">F3.1 数字逻辑电路基础</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/flink/"><i class="fa-fw fas fa-link"></i><span> 好友链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">F3.1 数字逻辑电路基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-13T03:00:00.000Z" title="发表于 2026-02-13 11:00:00">2026-02-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-13T03:33:47.896Z" title="更新于 2026-02-13 11:33:47">2026-02-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/">一生一芯</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>这是“一生一芯”项目的一个beginning，千里之行始于足下，希望能够通过自己的学习和体会，在下个学期末之前完成流片。如果我的数电的大作业最后是自己搭的一个芯片，我真的觉得那样酷毙了，learn for fun。</p>
+<p>处理器本质上是数字电路，而数字电路是用来处理数字信号的电路，而数字信号简单来说就是指0和1这样两种练得信号。0和1并不是数字意义的自然数的前两位，而是电路的高电平和低电平的两种不同的状态，所以有的时候也会把它们称之为<code>逻辑0</code>和<code>逻辑1</code>。</p>
+<p>模拟信号是连续的，像是电流和电压一样。</p>
+<p>想要学习数字电路，学习处理器的芯片设计，数字电路的知识是基础，而要学习数字电路，就是要学习信息在数字电路中是如何<strong>表示，处理和存储</strong>的。</p>
+<h2 id="通过晶体管实现0和1"><a href="#通过晶体管实现0和1" class="headerlink" title="通过晶体管实现0和1"></a>通过晶体管实现0和1</h2><p>0和1是抽象的，在数字电路中，0和1一般来说依靠晶体管进行实现，我们常常采用MOSFET（金属-氧化物-半导体场效应晶体管），根据用途的不同，一般又分为nMOS ，和pMOS,管两种。在模电中，我们一般运用的是场效应管的放大效应，即其对电压的放大能力，而在数电中，我们一般使用其开关特性。原理不进行赘述，参考模电教材。</p>
+<p>接下来我们学习CMOS(Complementary Metal-Oxide-Semiconductor)技术。由于nMOS和pMOS具有互补的特性, 在数字电路中通常将两者联合使用。下面是一个最简单的CMOS电路:<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211113005475.png" alt="image.png"><br>这里采用的是增强型的MOS管，即当电压为0时，并不存在导电沟道，我们分两种情况进行分析。</p>
+<ul>
+<li>A加高电压时，下方的MOS管导通，而上方的MOS管截止，所以Y点与地相连，输出低电平</li>
+<li>A加低电压时，上方的MOS管导通，而下方的MOS管截止，所以Y点与Vcc相连，输出高电平<br>这两种状态就是数字逻辑电路的两种基本状态</li>
+</ul>
+<h2 id="通过晶体管搭建门电路"><a href="#通过晶体管搭建门电路" class="headerlink" title="通过晶体管搭建门电路"></a>通过晶体管搭建门电路</h2><h3 id="非门"><a href="#非门" class="headerlink" title="非门"></a>非门</h3><p>unbelievable！！！<br>相信聪明的你不难发现，上面的那一张图片，竟然是一个彻彻底底的非门电路！！！<br>高电压时输入低电平，简直fancy！！<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211113918714.png" alt="image.png"><br>这个门电路就是非门，也叫做反相器。图表是一个三角形加一个圆圈，在门电路的语言中，小圆圈就代表着取反。</p>
+<h3 id="与非门"><a href="#与非门" class="headerlink" title="与非门"></a>与非门</h3><p>之前的模电的大实验的时候，所使用的74HC00N芯片也是一种14脚与非门器件。一句话概括这个器件就是1和1生成0，其它都是1.<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211114236343.png" alt="image.png"><br>这是一个与非门的电路，我们对它进行分析。</p>
+<p>N1N2是串联架构，而P1P2是并联架构，所以：</p>
+<ul>
+<li>如果A和B都是高电平，N1N2导通与地相连，P1P2断开，最终输出为低电平。</li>
+<li>如果A和B不全是高电平，N1N2至少有一个断开，即N1N2整体断开，但P1P2至少有一个会导通，所以输出为高电平。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211115436096.png" alt="image.png"><br>不得不佩服，这一种想法非常牛逼，完美的将开关和串并连结构结合在了一起，非常天才的构思。</li>
+</ul>
+<h3 id="与门"><a href="#与门" class="headerlink" title="与门"></a>与门</h3><p>有了上述的分析，与门实际上非常简单，就是在与非门上加了一个非门，其结构图和符号表示如下所示,与门的符号就是一个与非门去掉了一个圆圈，实际上是加上了一个非门。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211115342950.png" alt="image.png"></p>
+<h2 id="Q-A"><a href="#Q-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p>1.尝试分析一下门电路的行为和功能<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211170005159.png" alt="image.png"></p>
+<ul>
+<li>当A,B均为0时，P1P2导通，N1N2不通，输出为1</li>
+<li>当至少有一个是1时，P1P2整体不导通，N1N2至少有一个导通，输出为0<br>这个门电路的结构，依然是与非门<br>2.以下是或门的逻辑符号，尝试画出或门的晶体管结构</li>
+</ul>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211170117301.png" alt="image.png"><br>很大程度上是上面的那一张图，将VCC与GND的位置交换一下，即：</p>
+<ul>
+<li>pMOS端，并联</li>
+<li>nMOS端，串联<br>而后再经过一个非门，就得到了或门，思路仍然是参照上一部分</li>
+</ul>
+<h2 id="三输入与非门"><a href="#三输入与非门" class="headerlink" title="三输入与非门"></a>三输入与非门</h2><p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211172515207.png" alt="image.png"><br>我觉得这一个门电路的思路，可能比逻辑表示更好理解，其中只有当ABC三者全部为1时，输入为0，和两输入的与非门几乎是一模一样</p>
+<h3 id="异或门"><a href="#异或门" class="headerlink" title="异或门"></a>异或门</h3><p>用于计算异或（XOR)，通常在处理逻辑数据时进行运用，其逻辑符号如图：</p>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260211173553886.png" alt="image.png"><br>二者不同时，结果为1，否则为0。<br>同或门即为在此基础上进行一次取反。</p>
+<h2 id="“一生一芯”的小巧思"><a href="#“一生一芯”的小巧思" class="headerlink" title="“一生一芯”的小巧思"></a>“一生一芯”的小巧思</h2><h3 id="卡诺图化简"><a href="#卡诺图化简" class="headerlink" title="卡诺图化简"></a>卡诺图化简</h3><p>属实应该是数字电路的教科书上的必备的一个技术，我们将会因为考试而进行学习，显然的，我们需要在考试中用到，但在“一生一芯”这样的动手实践的项目上，显然是仅存在于理论的一个糟粕。</p>
+<p>因为这个技术的课延展性的可扩展性非常的低，在真实的项目中，我们面对的变量和数量大概是五个及其以上的，要用卡诺图进行这样一个东西的化简，效率相比是非常低的。事实上，现代工具通常会采用<strong>QMC算法</strong>，或者<strong>espresso算法</strong>对逻辑表达式进行化简。</p>
+<p><strong>emm，好像乍一看根本看不懂这两个算法，还是等待上完数电后的自己</strong></p>
+<p>In all，还是很有必要对于这一个方法具有一定的了解，我也希望能够，在接下来的数电课程中，少学一点，多做一点。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260212213722340.png" alt="image.png"></p>
+<p>注意，卡诺图的顺序一定要是00,01,11,10</p>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260212213927227.png" alt="image.png"><br>以BC项为例，即为将纵轴01,11和横轴11,10对应的2x2方格进行标注，经过以上的操作，我们得到了如上图所示的卡诺图。<br>然后进行画圈，有如下的要求：</p>
+<ul>
+<li>圈的数量少、范围大</li>
+<li>圈可重复圈，但每个圈必须要有新的最小项</li>
+<li>每个圈包含的小方格数量必须是2的N次方项，如1 2 4 8</li>
+</ul>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260212214112107.png" alt="image.png"><br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260212214622587.png" alt="image.png"></p>
+<ul>
+<li>看绿圈，CD的值都进行了变化，而AB的值保留为10不变</li>
+<li>看蓝圈，AB的值都发生了改变，而C发生了改变，D没有变</li>
+<li>看红圈，AB的值都发生了改变，而D发生了改变，C没有变</li>
+</ul>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260212214853265.png" alt="image.png"></p>
+<p>感觉卡诺图还是比较有意思的捏</p>
+<h3 id="搭建异或门"><a href="#搭建异或门" class="headerlink" title="搭建异或门"></a>搭建异或门</h3><p>异或门的确是相当的神奇的一个电路，我们尝试使用其它的门电路去实现它，然后用过仿真检验是否正确，并且计算我的方案使用了多少个晶体管。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/d375bc27755b54035a186031635b1c03.jpg" alt="d375bc27755b54035a186031635b1c03.jpg"><br>对于11和00而言，最后要进行0和0的运算得到0，而对于01和10而言，最后要通过1和0得到1，显然，这种逻辑关系，我们可以用或门进行实现。所以我们最后的设计电路需要：</p>
+<ul>
+<li>两个与非门</li>
+<li>一个或门<br>与非门需要四个晶体管，而或门需要六个，amazing！刚好十四个<br>但好像搞错了，我的logisim如下<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213100941877.png" alt="image.png"><br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213100957223.png" alt="image.png"></li>
+</ul>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101016512.png" alt="image.png"></p>
+<h3 id="异或门的全定制电路："><a href="#异或门的全定制电路：" class="headerlink" title="异或门的全定制电路："></a>异或门的全定制电路：</h3><p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png" alt="image.png"><br>真真切切的体会到了，什么是0帧开大，这是我能学会的吗。<br>这和真值表和逻辑的表示是紧密的相关的，通过我们真值表，我们不难看出异或门可以表示为</p>
+<ul>
+<li>当A&#x3D;0时，输出B</li>
+<li>当A&#x3D;1时，输出非B<br>最左边的操作是用来生成非A信号，而另外两个，则是相反的传输门。</li>
+<li>对于传输门1，P2N2进行分析，如果按照原始的上源下地而言，这个结构是一个基本的反相器，但由于其上源下地的控制电压是由A和非A决定的，所以我们可以分析：A为1时，传输门1对A取反，A为0时，上地下源不满足要求，故不会导通。</li>
+<li>但感觉AI说的这个传输门1，似乎更像一个带控制的非门。</li>
+<li>传输门2是一个正经的传输门，当控制信号A取0时，上方的控制信号是0，而下方的控制信号是1，上下导通，相反则截止，类似与一个开关。</li>
+</ul>
+<p>美妙</p>
+<h3 id="同或门"><a href="#同或门" class="headerlink" title="同或门"></a>同或门</h3><p>听说最小可以只用6个，真的可以这么恐怖吗。<br>相比有了上述的那个震惊的结构，这个真的只是去洒洒水啦，只是把刚刚的异或门的全定制电路的A控制信号，正反的控制极性反一下，在A为0时输出非B，在A为1时输出B，就OK啦</p>
+<h2 id="进位计数法"><a href="#进位计数法" class="headerlink" title="进位计数法"></a>进位计数法</h2><p>我们已经知道，cMOS电路可以用来表示和处理0和1的信号，但我们的物理世界并不只有0和1，因此需要考虑如何用1和0来表示物理世界的各种信息，我们把这样一种表示方法称之为编码（encoding）。二进制和十六进制法，在python的数据结构中我们大概已经有了体会，实际上并不难。我们在这里略去。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>1.卡诺图相关：【卡诺图化简详解】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1P7ZYY9EDX?vd_source=0bcaeb0bf7fa61601fea861152f447e7">https://www.bilibili.com/video/BV1P7ZYY9EDX?vd_source=0bcaeb0bf7fa61601fea861152f447e7</a></p>
+<p>2.传输器相关：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32134548991">(7 封私信 &#x2F; 80 条消息) CMOS反相器7 - 传输门 - 知乎</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Jiayi Li</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">http://example.com/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">plusone's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></div><div class="post-share"><div class="social-share" data-image="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/09/0%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇原创博客"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">我的第一篇原创博客</div></div><div class="info-2"><div class="info-item-1">作为一个想要使用hexo在github上搭建自己的主页的小白而言，首先需要搭建好自己的主页，也许以为是markdown的原因，也许我们需要还要搭建一个图床。我相信hexo架构一定是一个不错的选择，以下这一部分就是一个hexo架构搭建的过程。 参考教程：文档 | Hexo 什么是hexohexo是一个快速简洁并且高效的一个博客的框架，使用markdown语言解系文章。 安装安装hexo需要以下的应用程序：  node.js  git  关于Git首先打开powershell，输入git --version,如果有显示版本号，那么我们的程序就是正确安装好了的。 关于node.js我们通过nvs进行安装，首先用管理员身份打开powershell，执行以下的命令：winget install jasongin.nvs,然后就会开始安装。但是在这里有一个坑，就是如果我们直接打开普通的powershell的模式下，我们输入nvs --version 的时候会显示无法执行脚本文件，这是因为powershell的管理模式默认的运行策略是restricted，所以我们需要运行命令，更改运行的模式。...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/02/09/0%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇原创博客"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-09</div><div class="info-item-2">我的第一篇原创博客</div></div><div class="info-2"><div class="info-item-1">作为一个想要使用hexo在github上搭建自己的主页的小白而言，首先需要搭建好自己的主页，也许以为是markdown的原因，也许我们需要还要搭建一个图床。我相信hexo架构一定是一个不错的选择，以下这一部分就是一个hexo架构搭建的过程。 参考教程：文档 | Hexo 什么是hexohexo是一个快速简洁并且高效的一个博客的框架，使用markdown语言解系文章。 安装安装hexo需要以下的应用程序：  node.js  git  关于Git首先打开powershell，输入git --version,如果有显示版本号，那么我们的程序就是正确安装好了的。 关于node.js我们通过nvs进行安装，首先用管理员身份打开powershell，执行以下的命令：winget install jasongin.nvs,然后就会开始安装。但是在这里有一个坑，就是如果我们直接打开普通的powershell的模式下，我们输入nvs --version 的时候会显示无法执行脚本文件，这是因为powershell的管理模式默认的运行策略是restricted，所以我们需要运行命令，更改运行的模式。...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jiayi Li</div><div class="author-info-description">大二学员一枚，CV学习中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lijiayi-plus"><i class="fab fa-github"></i><span>我的github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%99%B6%E4%BD%93%E7%AE%A1%E5%AE%9E%E7%8E%B00%E5%92%8C1"><span class="toc-number">1.</span> <span class="toc-text">通过晶体管实现0和1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%99%B6%E4%BD%93%E7%AE%A1%E6%90%AD%E5%BB%BA%E9%97%A8%E7%94%B5%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">通过晶体管搭建门电路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%97%A8"><span class="toc-number">2.1.</span> <span class="toc-text">非门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E9%9D%9E%E9%97%A8"><span class="toc-number">2.2.</span> <span class="toc-text">与非门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E9%97%A8"><span class="toc-number">2.3.</span> <span class="toc-text">与门</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Q-A"><span class="toc-number">3.</span> <span class="toc-text">Q&amp;A</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E8%BE%93%E5%85%A5%E4%B8%8E%E9%9D%9E%E9%97%A8"><span class="toc-number">4.</span> <span class="toc-text">三输入与非门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%88%96%E9%97%A8"><span class="toc-number">4.1.</span> <span class="toc-text">异或门</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E2%80%9D%E7%9A%84%E5%B0%8F%E5%B7%A7%E6%80%9D"><span class="toc-number">5.</span> <span class="toc-text">“一生一芯”的小巧思</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E8%AF%BA%E5%9B%BE%E5%8C%96%E7%AE%80"><span class="toc-number">5.1.</span> <span class="toc-text">卡诺图化简</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E5%BC%82%E6%88%96%E9%97%A8"><span class="toc-number">5.2.</span> <span class="toc-text">搭建异或门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%88%96%E9%97%A8%E7%9A%84%E5%85%A8%E5%AE%9A%E5%88%B6%E7%94%B5%E8%B7%AF%EF%BC%9A"><span class="toc-number">5.3.</span> <span class="toc-text">异或门的全定制电路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%88%96%E9%97%A8"><span class="toc-number">5.4.</span> <span class="toc-text">同或门</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">进位计数法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">参考：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/" title="F3.1 数字逻辑电路基础"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="F3.1 数字逻辑电路基础"/></a><div class="content"><a class="title" href="/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/" title="F3.1 数字逻辑电路基础">F3.1 数字逻辑电路基础</a><time datetime="2026-02-13T03:00:00.000Z" title="发表于 2026-02-13 11:00:00">2026-02-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/09/0%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇原创博客"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我的第一篇原创博客"/></a><div class="content"><a class="title" href="/2026/02/09/0%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇原创博客">我的第一篇原创博客</a><time datetime="2026-02-09T02:00:00.000Z" title="发表于 2026-02-09 10:00:00">2026-02-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/07/hello-world/" title="Hello World">Hello World</a><time datetime="2026-02-07T04:20:22.919Z" title="发表于 2026-02-07 12:20:22">2026-02-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jiayi Li</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
