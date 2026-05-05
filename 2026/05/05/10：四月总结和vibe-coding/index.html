@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>10：四月总结和vibe coding | plusone's blog</title><meta name="author" content="Jiayi Li"><meta name="copyright" content="Jiayi Li"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="工具飞速迭代，我想，有一个朴素地辩证法。我们能发挥出的实力，是自己的内涵+工具的外延。如果工具飞速进步，而我们的大脑不断地萎缩，那我们最后是能够担起大任的吗。显然不是。   所以，核心在于，让自己变得更聪明，而不是让工具变得更智能。外本内末，歧路亡羊。我还是要去走那一条最为艰难的道路  我想，何其有幸，我的确是接触到了一个，很大程度上的，跨时代的一个工具。事实上，我才接触codex没两天，但目前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10：四月总结和vibe coding">
+<meta property="og:url" content="http://example.com/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/index.html">
+<meta property="og:site_name" content="plusone&#39;s blog">
+<meta property="og:description" content="工具飞速迭代，我想，有一个朴素地辩证法。我们能发挥出的实力，是自己的内涵+工具的外延。如果工具飞速进步，而我们的大脑不断地萎缩，那我们最后是能够担起大任的吗。显然不是。   所以，核心在于，让自己变得更聪明，而不是让工具变得更智能。外本内末，歧路亡羊。我还是要去走那一条最为艰难的道路  我想，何其有幸，我的确是接触到了一个，很大程度上的，跨时代的一个工具。事实上，我才接触codex没两天，但目前">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg">
+<meta property="article:published_time" content="2026-05-05T13:01:35.000Z">
+<meta property="article:modified_time" content="2026-05-05T13:02:56.463Z">
+<meta property="article:author" content="Jiayi Li">
+<meta property="article:tag" content="学习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "10：四月总结和vibe coding",
+  "url": "http://example.com/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/",
+  "image": "https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg",
+  "datePublished": "2026-05-05T13:01:35.000Z",
+  "dateModified": "2026-05-05T13:02:56.463Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jiayi Li",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '10：四月总结和vibe coding',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/flink/"><i class="fa-fw fas fa-link"></i><span> 好友链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">plusone's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">10：四月总结和vibe coding</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/flink/"><i class="fa-fw fas fa-link"></i><span> 好友链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">10：四月总结和vibe coding</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-05T13:01:35.000Z" title="发表于 2026-05-05 21:01:35">2026-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-05T13:02:56.463Z" title="更新于 2026-05-05 21:02:56">2026-05-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<p>工具飞速迭代，我想，有一个朴素地辩证法。我们能发挥出的实力，是自己的内涵+工具的外延。如果工具飞速进步，而我们的大脑不断地萎缩，那我们最后是能够担起大任的吗。显然不是。</p>
+</blockquote>
+<blockquote>
+<p>所以，核心在于，让自己变得更聪明，而不是让工具变得更智能。外本内末，歧路亡羊。我还是要去走那一条最为艰难的道路</p>
+</blockquote>
+<p>我想，何其有幸，我的确是接触到了一个，很大程度上的，跨时代的一个工具。事实上，我才接触codex没两天，但目前摆在我面前的，是一个前所未有的，工具，它来自karpathy的一个我认为天才的想法：</p>
+<p><em>One day, frontier AI research used to be done by meat computers in between eating, sleeping, having other fun, and synchronizing once in a while using sound wave interconnect in the ritual of “group meeting”. That era is long gone. Research is now entirely the domain of autonomous swarms of AI agents running across compute cluster megastructures in the skies. The agents claim that we are now in the 10,205th generation of the code base, in any case no one could tell if that’s right or wrong as the “code” is now a self-modifying binary that has grown beyond human comprehension. This repo is the story of how it all began. -@karpathy, March 2026</em>.</p>
+<p>是的，现在有没有，到那一天，就是电脑的智能体，真的该去取代人脑的智能体了呢，虽然我才接触codex两天，但我觉得，这是完全可能的。人类是否应该不再需要代码和code，只用去编写md。</p>
+<p>这个仓库真的很小很小，小到只有三个核心的文件：prepare.py ,train.py,program.md。一言以蔽之，program不改喂AI，prepare不改，train交给AI比如codex进行一部分的改动。</p>
+<p>我问了codex关于这个项目的这样一个问题：</p>
+<blockquote>
+<p>如果我现在有一个红外小目标检测系统，我能不能通过设置损失函数，输入输出数据，理论结果，而靠模型的迭代推理自动生成全部的模型迭代呢？</p>
+</blockquote>
+<p>它的答案是：</p>
+<blockquote>
+<p>可以，但不是“只设损失函数就能全自动”。</p>
+</blockquote>
+<p><strong>结论</strong></p>
+<ul>
+<li>你可以把它做成“自动迭代检测模型”的系统，自动化 70%-90% 的实验流程。</li>
+<li>但“全部自动生成并保证持续创新”不现实，必须先定义好搜索空间和约束。</li>
+</ul>
+<p><strong>要具备的核心要素</strong></p>
+<ol>
+<li>明确目标函数：如 Pd↑、FAR↓、mAP↑、延迟↓、显存↓，合成一个评分函数。</li>
+<li>固定评估协议：固定 train&#x2F;val&#x2F;test 划分、固定随机种子、固定训练预算。</li>
+<li>可搜索模型空间：骨干、检测头、损失项、数据增强、学习率策略的可选集合。</li>
+<li>自动闭环：生成候选 -&gt; 训练 -&gt; 验证 -&gt; 记录 -&gt; keep&#x2F;discard -&gt; 下一轮。</li>
+<li>防作弊机制：防过拟合、防数据泄漏、失败回滚、OOM&#x2F;超时处理。</li>
+</ol>
+<p>这似乎并不是非常的难如登天，我觉得，我应该试试</p>
+<hr>
+<h1 id="使用vibe-coding的一些所见所闻"><a href="#使用vibe-coding的一些所见所闻" class="headerlink" title="使用vibe coding的一些所见所闻"></a>使用vibe coding的一些所见所闻</h1><p>今天是4月21日，距离接触到codex，以及过了一个多月。<br>我确确实实感受到了vibe coding的魅力，也深刻的知道了一个点。<br>如果还只是像周围同学那样，凡事copy代码扔给AI，还只是在网页端进行操作的话，这样的时代即将被淘汰。人的进步速度，很难比得上AI的进化速度，还是那样脑子发昏地凡事问AI，最后没有提升认知，没有留下能力，其可笑也呼？</p>
+<p>我还是试了很多次的，最后体现出的结果大概可以由一句话来表示：</p>
+<blockquote>
+<p>我认为，AI可以在我们框选的范围内，实现局部的最优化和调优，从而达到正常情况下难以匹敌的准确率，而在更加广泛的0-1的过程中，这仍然是值得商榷的。也就是说，human matters</p>
+</blockquote>
+<p>当然，在现在对于AI的vibe coding有了一些新的了解和理解，可以参考这篇文章：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/vmN5-lrCmMXBgHTZHFDkoQ">https://mp.weixin.qq.com/s/vmN5-lrCmMXBgHTZHFDkoQ</a><br>我一定不会忘记karpathy，改变我认知的人，也是某种AI思想的引路人。</p>
+<h1 id="一个句号"><a href="#一个句号" class="headerlink" title="一个句号"></a>一个句号</h1><p>今天是五月五日，也是五一劳动节的最后一天。我不想再拖拉了，还是要把过去的一些东西给他结结实实的存个档。曾经我经常写blog的时候，很多东西就想着要写完。要有一个好的beginning，好的ending。实际上我会发现，当我花了很多的时间进行一些修饰的时候，这一篇blog可能是很难完成的。所以今天我在我的blog上面更新了很多的库存，这些有些是之前的一些研究，有的是现在的一些思考，但他们最后都记录着我一段时间的理解与思考，所以我在想，他们有必要存在于我的最后的博客里面，成为我一段生活的见证。</p>
+<p>这个四月并不平凡，经历了住院，还有住院时间仍然不得停歇的大唐杯与挑战杯，好像我一直都非常的忙碌，没有时间给自己留下很多的记忆，但我们也知道，那不一定正确。稍微记录一点，还有帮学长画图，里面的mask技巧确实让我非常的受用。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/ab26a1c77e6a4cd4aaa857142277a2af.png" alt="ab26a1c77e6a4cd4aaa857142277a2af.png"></p>
+<p>好比我在学习的过程中，经常在累的时候就去刷手机，那到最后演变成为了身心的疲惫，那实际上并不快乐，我所希望的，就是去找到更加高级一些的快乐，并且由此来充盈自己。</p>
+<p>我很羡慕三月的自己，因为三月的自己确实做了很多的事情，以及，做了非常非常多的记录，我不知道是不是最后这一些记录成就了我自己，但是我会非常的开心。我想，我必须要开始记录了。</p>
+<p>活很多，事很杂，我不想要去单一的进行时间的堆砌。因为成长需要脑力，需要时间与空气。而不是在一个阴暗的角落里面，像泥鳅一样阴暗地爬行。还是要去扭住牛尾巴，发现一件或者两件重要的事情，然后去完成那一两件事就够了，不需要做很多。</p>
+<p>你已经很棒了，不需要在给自己的大脑添加很多的负载。<br>你已经很勤奋，不需要在添加压力，损害大脑未来的潜力。<br>你需要的只是认知，因为在AI快速发展的现在，任何的工具上的能力都会在一定的时间长度下，被AI所取代。那么，我们的任务，我们的使命，在哪里。</p>
+<p>我把这一部分生命的感悟，写作“那些花儿”。</p>
+<p>他并不是一次偶然的生命体验，相反来得非常的蹊跷。和父母吃完饭的下午，我在公园里散步。如果我非常的有精力，想必我一定会走很远，拍很多的照片。但这一次我太累了，我直接在小径旁边的长凳子上。我好像睡着了，我是在漫天花语中睡着的。旁边几米并没有花，但是随着风的吹拂我尝到了非常好闻的花香，还有在风的吹拂后，夹带着下了雨后森林的味道，我不知道这种形容是否贴切，又或者是不是我对它后期的美化以及一些依稀的映像，但我知道，这的确是我的生命中的一次非常高潮的生命体验。</p>
+<p>想必这样一种触动，他不可言说。他人无法体味，但是却实实在在的，充斥着我的生命乐趣，我想，这很美妙。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/f6b5c0bbf46d77b96a75f7e59240e1ab.jpg"><br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg" alt="bf0a873999ea9d67cd3d97ff8ea3b753.jpg"><br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/cf6380b0acf5e640efce90ffda6a78c6.jpg" alt="cf6380b0acf5e640efce90ffda6a78c6.jpg"><br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/1ac142db8c2b30b84b2adc88e5674421.jpg" alt="1ac142db8c2b30b84b2adc88e5674421.jpg"></p>
+<p>我希望，将那一朵鲜花和他的美丽，融进生命的一个角落。有一些花不需要盛大，但你可以等待它去生根发芽。</p>
+<blockquote>
+<p>不用躲，些许风霜罢了；<br>那股肆意，命运夺不走。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Jiayi Li</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/">http://example.com/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">plusone's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></div><div class="post-share"><div class="social-share" data-image="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/05/05/9%EF%BC%9A%E8%AF%BB%E7%BB%8F%E5%85%B8%EF%BC%8Cattention-is-all-you-need/" title="9：读经典，attention is all you need"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">9：读经典，attention is all you need</div></div><div class="info-2"><div class="info-item-1">这一篇论文，在2017年以一个标题党的姿态产生，但是当时对它提起注意的人似乎没有那么多。但就是这么一个work，在如今的各种领域之内攻城略地，几乎没有很多人注意到，这开启的是一个AI的新时代，不断攻城略地，从机器翻译到整个NLP，然后在现在，几乎打遍了CV。现在，没有用到transformer的地方已经很少了。 In this work we propose the Transformer, a model architecture eschewing（故意避免） recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/05/7-%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-Frustratingly-Simple-Few-Shot-Object-Detection/" title="7:论文笔记-Frustratingly Simple Few-Shot Object Detection"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-05</div><div class="info-item-2">7:论文笔记-Frustratingly Simple Few-Shot Object Detection</div></div><div class="info-2"><div class="info-item-1">由于我的挑战杯是小样本检测，所以我想通过这样一篇文章，对于这个网络和这一个东西有着一个基础的了解 读论文abstract Detecting rare objects from a few examples is an emerging problem. Prior works show metalearning is a promising approach. But, finetuning techniques have drawn scant attention.  从少量样本中完成特征的检测是一个比较难的任务，在这个的研究方法中，元学习得到了广泛的关注，而微调没有引起很多的关注。  We find that fine-tuning only the last layer of existing detectors on rare classes is crucial to the few-shot object detection task.  只是对于现有的探测器的最后一层进行微调，感觉有点意思。 conclusion We proposed a simple two-...</div></div></div></a><a class="pagination-related" href="/2026/04/23/4%EF%BC%9A%E8%AF%BB%E5%90%8E%E6%84%9F%E2%80%94%E2%80%94%E5%A6%82%E4%BD%95%E8%B5%A2%E5%BE%97%E6%9C%80%E4%BD%B3%E8%AE%BA%E6%96%87%E5%A5%96/" title="4：读后感——何为好的论文"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-23</div><div class="info-item-2">4：读后感——何为好的论文</div></div><div class="info-2"><div class="info-item-1">读后感尼古拉斯-卡里尼，和他的网站：如何赢得最佳论文奖 （或者，关于如何进行重要研究的个人观点） 仅仅做一个记录，来自一个科研的小白。 想出最值得写论文的点子要有好的品味，去挑选一个问题 The single most important skill to develop for high-impact research is good taste in what problems are worth solving. If you have good taste, and you keep writing papers, eventually you’ll write one with exceptionally high impact. But if you have bad taste, you could write a hundred papers and never do anything of consequence.  也许我们可以发一百篇论文，但如果我们的文字不具有品味，不是在一开始就在做一件正确的事，那么也许，我们终其一生，never do anything ...</div></div></div></a><a class="pagination-related" href="/2026/03/22/F6%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%9D%97%E8%8A%AF%E7%89%87/" title="F6：我的第一块芯片"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/a622fe7b6292621343167a69379b8744.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-22</div><div class="info-item-2">F6：我的第一块芯片</div></div><div class="info-2"><div class="info-item-1">我们已经实现了sCPU，可以计算数列求和，但是这个处理器确实让我们对处理器如何工作有着更为深入的认识。但由于限制，不能运行复杂的程序，由于其指令集的宽度，PC的数量，GPR的位宽，指令的功能。所以，在接下来我们要实现一个功能完备的RISC-V处理，可以运行更多的程序。 Just for fun! let’s go! 迷你RISC-V指令集RISC-V是近十年流行起来的开放指令集架构, 它采用模块化的思想, 把指令划分成不同模块。除了基础指令集RV32I, 还有各种指令扩展, 包括乘除扩展, 浮点扩展, 原子操作扩展等. 开发者可以根据自身需求选择一个或多个扩展, 也可以一个扩展都不选, 这种灵活性受到了开发者的喜爱. RV32I共有42条指令, 通过实现RV32I, 处理器已经足够完成绝大部分的计算工作. 不过为了进一步降低开发的工作量, 我们提出了一个”迷你RISC-V”指令集minirv, 从RV32I中选出了8条指令, 用它们来替代其他RV32I指令的功能, 使得RV32I能完成的工作, minirv也能完成. 这样, 我们就不必实现完整的42条RV32I指令, 也能让处理...</div></div></div></a><a class="pagination-related" href="/2026/05/05/6%EF%BC%9A%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-Equalization-Loss-v2-A-New-Gradient-Balance-Approach-for-Long-tailed-Object-Detection/" title="6：论文笔记 Equalization Loss v2   A New Gradient Balance Approach for Long-tailed Object Detection"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-05</div><div class="info-item-2">6：论文笔记 Equalization Loss v2   A New Gradient Balance Approach for Long-tailed Object Detection</div></div><div class="info-2"><div class="info-item-1">这是一个 EQLv2 (Equalization Loss v2) 目标检测项目，基于MMDetection v2框架开发并进行了深度定制。该项目主要解决长尾分布(long-tail distribution)下的目标检测问题——即数据集中大量类别具有极少的样本，导致模型在这些稀有类别上的表现极差。考虑到ddl马上到来，我们对于代码进行先行的处理。https://github.com/tztztztztz/eqlv2。 这个项目代码目前支持COCO、LVIS、OpenImages等多个长尾分布的主流的数据集。 首先我们对于项目的结构进行分析如下： 123456789101112131415161718192021222324252627mmdetection-eql/├── configs/               # 配置文件目录（37,200+ tokens，核心）│   ├── end2end/           # EQL/EQLv2 核心配置文件│   │   ├── eqlv2_r50_8x2_1x.py    # EQLv2配置│   │   ├── eql_...</div></div></div></a><a class="pagination-related" href="/2026/02/13/F3-1-%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/" title="F3.1 数字逻辑电路基础"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260213101937297.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-13</div><div class="info-item-2">F3.1 数字逻辑电路基础</div></div><div class="info-2"><div class="info-item-1">这是“一生一芯”项目的一个beginning，千里之行始于足下，希望能够通过自己的学习和体会，在下个学期末之前完成流片。如果我的数电的大作业最后是自己搭的一个芯片，我真的觉得那样酷毙了，learn for fun。 处理器本质上是数字电路，而数字电路是用来处理数字信号的电路，而数字信号简单来说就是指0和1这样两种练得信号。0和1并不是数字意义的自然数的前两位，而是电路的高电平和低电平的两种不同的状态，所以有的时候也会把它们称之为逻辑0和逻辑1。 模拟信号是连续的，像是电流和电压一样。 想要学习数字电路，学习处理器的芯片设计，数字电路的知识是基础，而要学习数字电路，就是要学习信息在数字电路中是如何表示，处理和存储的。 通过晶体管实现0和10和1是抽象的，在数字电路中，0和1一般来说依靠晶体管进行实现，我们常常采用MOSFET（金属-氧化物-半导体场效应晶体管），根据用途的不同，一般又分为nMOS ，和pMOS,管两种。在模电中，我们一般运用的是场效应管的放大效应，即其对电压的放大能力，而在数电中，我们一般使用其开关特性。原理不进行赘述，参考模电教材。 接下来我们学习CMOS(Com...</div></div></div></a><a class="pagination-related" href="/2026/02/09/0%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇原创博客"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-09</div><div class="info-item-2">我的第一篇原创博客</div></div><div class="info-2"><div class="info-item-1">作为一个想要使用hexo在github上搭建自己的主页的小白而言，首先需要搭建好自己的主页，也许以为是markdown的原因，也许我们需要还要搭建一个图床。我相信hexo架构一定是一个不错的选择，以下这一部分就是一个hexo架构搭建的过程。 参考教程：文档 | Hexo 什么是hexohexo是一个快速简洁并且高效的一个博客的框架，使用markdown语言解系文章。 安装安装hexo需要以下的应用程序：  node.js  git  关于Git首先打开powershell，输入git --version,如果有显示版本号，那么我们的程序就是正确安装好了的。 关于node.js我们通过nvs进行安装，首先用管理员身份打开powershell，执行以下的命令：winget install jasongin.nvs,然后就会开始安装。但是在这里有一个坑，就是如果我们直接打开普通的powershell的模式下，我们输入nvs --version 的时候会显示无法执行脚本文件，这是因为powershell的管理模式默认的运行策略是restricted，所以我们需要运行命令，更改运行的模式。...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jiayi Li</div><div class="author-info-description">大二学员一枚，CV学习中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lijiayi-plus"><i class="fab fa-github"></i><span>我的github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8vibe-coding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%89%80%E8%A7%81%E6%89%80%E9%97%BB"><span class="toc-number">1.</span> <span class="toc-text">使用vibe coding的一些所见所闻</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%A5%E5%8F%B7"><span class="toc-number">2.</span> <span class="toc-text">一个句号</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/" title="10：四月总结和vibe coding"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="10：四月总结和vibe coding"/></a><div class="content"><a class="title" href="/2026/05/05/10%EF%BC%9A%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93%E5%92%8Cvibe-coding/" title="10：四月总结和vibe coding">10：四月总结和vibe coding</a><time datetime="2026-05-05T13:01:35.000Z" title="发表于 2026-05-05 21:01:35">2026-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/05/9%EF%BC%9A%E8%AF%BB%E7%BB%8F%E5%85%B8%EF%BC%8Cattention-is-all-you-need/" title="9：读经典，attention is all you need">9：读经典，attention is all you need</a><time datetime="2026-05-05T12:25:55.000Z" title="发表于 2026-05-05 20:25:55">2026-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/05/8%EF%BC%9Acaformer%E7%9A%84%E5%A4%8D%E7%8E%B0/" title="8：caformer的复现">8：caformer的复现</a><time datetime="2026-05-05T12:24:16.000Z" title="发表于 2026-05-05 20:24:16">2026-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/05/7-%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-Frustratingly-Simple-Few-Shot-Object-Detection/" title="7:论文笔记-Frustratingly Simple Few-Shot Object Detection">7:论文笔记-Frustratingly Simple Few-Shot Object Detection</a><time datetime="2026-05-05T12:19:07.000Z" title="发表于 2026-05-05 20:19:07">2026-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/05/6%EF%BC%9A%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-Equalization-Loss-v2-A-New-Gradient-Balance-Approach-for-Long-tailed-Object-Detection/" title="6：论文笔记 Equalization Loss v2   A New Gradient Balance Approach for Long-tailed Object Detection">6：论文笔记 Equalization Loss v2   A New Gradient Balance Approach for Long-tailed Object Detection</a><time datetime="2026-05-05T12:15:48.000Z" title="发表于 2026-05-05 20:15:48">2026-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jiayi Li</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
