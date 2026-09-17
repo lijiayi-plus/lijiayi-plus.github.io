@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>23：Strip-net的基本结构 | plusone's blog</title><meta name="author" content="Jiayi Li"><meta name="copyright" content="Jiayi Li"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Strip R-CNN 论文原文：Strip R-CNN: Large Strip Convolution for Remote Sensing Object Detection 代码仓库：YXB-NKU&#x2F;Strip-R-CNN: [AAAI 2026]”Strip R-CNN: Large Strip Convolution for Remote Sensing Object Dete">
+<meta property="og:type" content="article">
+<meta property="og:title" content="23：Strip-net的基本结构">
+<meta property="og:url" content="http://example.com/2026/09/17/23%EF%BC%9AStrip-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="plusone&#39;s blog">
+<meta property="og:description" content="Strip R-CNN 论文原文：Strip R-CNN: Large Strip Convolution for Remote Sensing Object Detection 代码仓库：YXB-NKU&#x2F;Strip-R-CNN: [AAAI 2026]”Strip R-CNN: Large Strip Convolution for Remote Sensing Object Dete">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg">
+<meta property="article:published_time" content="2026-09-17T14:26:52.000Z">
+<meta property="article:modified_time" content="2026-09-17T14:28:56.480Z">
+<meta property="article:author" content="Jiayi Li">
+<meta property="article:tag" content="学习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "23：Strip-net的基本结构",
+  "url": "http://example.com/2026/09/17/23%EF%BC%9AStrip-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/",
+  "image": "https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg",
+  "datePublished": "2026-09-17T14:26:52.000Z",
+  "dateModified": "2026-09-17T14:28:56.480Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jiayi Li",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/09/17/23%EF%BC%9AStrip-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '23：Strip-net的基本结构',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/flink/"><i class="fa-fw fas fa-link"></i><span> 好友链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">plusone's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">23：Strip-net的基本结构</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/flink/"><i class="fa-fw fas fa-link"></i><span> 好友链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">23：Strip-net的基本结构</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-09-17T14:26:52.000Z" title="发表于 2026-09-17 22:26:52">2026-09-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-09-17T14:28:56.480Z" title="更新于 2026-09-17 22:28:56">2026-09-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="Strip-R-CNN-论文"><a href="#Strip-R-CNN-论文" class="headerlink" title="Strip R-CNN 论文"></a>Strip R-CNN 论文</h2><p>原文：Strip R-CNN: Large Strip Convolution for Remote Sensing Object Detection</p>
+<p>代码仓库：<a target="_blank" rel="noopener" href="https://github.com/YXB-NKU/Strip-R-CNN">YXB-NKU&#x2F;Strip-R-CNN: [AAAI 2026]”Strip R-CNN: Large Strip Convolution for Remote Sensing Object Detection”</a></p>
+<h3 id="网络解决的核心问题"><a href="#网络解决的核心问题" class="headerlink" title="网络解决的核心问题"></a>网络解决的核心问题</h3><p>Strip R-CNN 主要解决的是：遥感图像中的高长宽比目标，也就是细长目标，难以提取完整特征，并且难以进行精确定位。</p>
+<p><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/1.png" alt="1.png"></p>
+<p>可以看出strip R-CNN 方法相比其他方法的mAP更高，尤其是在长宽比大的时候优势更明显。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/3.png" alt="3.png"></p>
+<p>比较了LSKNet,PKINet,Strip R-CNN 三种方法的结构说，Strip R-CNN的结构Param最小，但mAP最高，说明了它的结构更优。</p>
+<h3 id="2-网络整体结构"><a href="#2-网络整体结构" class="headerlink" title="2.网络整体结构"></a>2.网络整体结构</h3><p>Strip R-CNN 建立在 <strong>Oriented R-CNN</strong> 框架上:</p>
+<ul>
+<li>使用 StripNet 替换原 Backbone；</li>
+<li>使用 Strip Head 替换原 Detection Head。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4.png" alt="4.png"><br> 这是StripNet Backbone的结构<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/5.png" alt="5.png"><br>这是Strip head的结构</li>
+</ul>
+<h3 id="实验结果："><a href="#实验结果：" class="headerlink" title="实验结果："></a>实验结果：</h3><p>1.说明strip R-CNN  FLOPs 低，mAP 高，以此来说明该方法的优越性。<br>2.消融实验说明了条带卷积核大小的最佳配置(19,19,19,19)，顺序条带卷积优于并行条带卷积以及StripNet 的通用性。<br><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260805130121177.png" alt="image.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Jiayi Li</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/09/17/23%EF%BC%9AStrip-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/">http://example.com/2026/09/17/23%EF%BC%9AStrip-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">plusone's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></div><div class="post-share"><div class="social-share" data-image="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/09/17/24%EF%BC%9Ayolo-26%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="24：yolo-26的基本结构"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">24：yolo-26的基本结构</div></div><div class="info-2"><div class="info-item-1">YOLO26 原文： Ultralytics YOLO26: Unified Real-Time End-to-End Vision Models  代码： ultralytics&#x2F;ultralytics  网络解决的核心问题YOLO26 主要解决三个问题：依赖 NMS、DFL 检测头较重且回归范围受限、小目标可能没有正样本。 网络整体结构YOLO26 沿用 YOLO11 的基本框架，主要改进检测头、标签分配和训练方法，并对 Backbone&#x2F;Neck 做轻量调整（如增加注意力机制）。 训练策略1. 双检测头   图 2：YOLO26 双检测头训练流程。一对多头提供密集监督，一对一头负责无 NMS 推理。Progressive Loss 将训练重点逐渐转向一对一头。2. 移除 DFL：YOLO26 以直接框回归和 L1 损失替代 DFL，减轻检测头并解除回归范围限制。3. 小目标标签分配：STAL 在候选筛选时临时放大小框，使其获得正样本。4. 其它改进：MuSGD 用于加快收敛等等。 YOLO26 训练流程 Backbone + Neck：生成多尺度特征图和...</div></div></div></a><a class="pagination-related" href="/2026/09/17/22%EF%BC%9Alsknet%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="22：lsknet的基本结构"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">22：lsknet的基本结构</div></div><div class="info-2"><div class="info-item-1">原文：《LSKNet: A Foundation Lightweight Backbone for  Remote Sensing》 仓库：zcablii&#x2F;LSKNet: (IJCV2024 &amp; ICCV2023) LSKNet: A Foundation Lightweight Backbone for Remote Sensing 这个网络解决的核心的问题：是现有的网络，往往只是去看那个目标本身。但是，那失去了很多上下文的信息。LSKnet采用大卷积核的方式，能够获得更大的感受野。同时，LSKnet可以动态调整其感受野，使得其在识别目标及其背景信息中，有很好的检测效果。原文的论述如下：  In particular, most objects in aerial images may be small and difficult to identify based on their appearance alone. Instead, recognizing these objects relies on their context, as the surr...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/24/17%EF%BC%9Aharness/" title="17：harness"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-24</div><div class="info-item-2">17：harness</div></div><div class="info-2"><div class="info-item-1">读了一篇文章，链接如下，遂进行一次记录https://mp.weixin.qq.com/s/77dyufF3MP8stHPS0BApNw 几个概念 rulerule是对于AI的软约束 什么意思？就是 AI 理论上应该遵守它，但它并不一定真的每次都遵守。尤其当 Rule 越来越多、需求越来越复杂的时候，模型会出现三种典型情况：  它忘了某条 Rule 它觉得某条 Rule 和这次需求“无关” 它知道这条 Rule，但偷懒没做，还给自己找理由  也就可能是reward hacking的出现 MCP给一个定义：MCP（Model Context Protocol）本质上是一种标准方式：把「仓库之外的能力」接进 AI 的工作链路里——既能拉取信息，也能在明确边界内触发外部系统的动作。 如果没有MCP，AI通常被锁在  本地代码仓库 本地脚本 当前对话上下文  所以说能分析。能跑代码，但是不能安全结构化的接入更加外层的工程系统 它们的共性是：需要让 AI 在可控边界里调用系统能力，而不是把凭据和即兴命令散落在对话里。MCP 正是这类能力的连接层：把外部系统以 Tool &#x2F; 资源的...</div></div></div></a><a class="pagination-related" href="/2026/05/08/12%EF%BC%9A%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9AYOLOv4%EF%BC%881%EF%BC%89/" title="12:论文笔记：YOLOv4（1）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-08</div><div class="info-item-2">12:论文笔记：YOLOv4（1）</div></div><div class="info-2"><div class="info-item-1">Abstract这是一篇2020年的paper，代表着yolov4的出现，也是一个小的里程碑maybe。首先在此之前的yolov3，在模型的多尺度预测和深度的网络，有一些提升。小目标检测的性能更加的优良。 有很多的特征能够提高卷积神经网络的性能，这一篇论文似乎是对于这些进行了一个测试  We assume that such universal features include Weighted-Residual-Connections (WRC), Cross-Stage-Partial-connections (CSP), Cross mini-Batch Normalization (CmBN), Self-adversarial-training (SAT) and Mish-activation.   We use new features: WRC, CSP, CmBN, SAT, Mish activation, Mosaic data augmentation, CmBN, DropBlock regularization, and CIoU loss, and ...</div></div></div></a><a class="pagination-related" href="/2026/02/28/1-bilibili%E4%B8%8B%E8%BD%BD%E5%99%A8/" title="1:bilibili下载器"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/20260228132233626.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-28</div><div class="info-item-2">1:bilibili下载器</div></div><div class="info-2"><div class="info-item-1">最近喜欢听钢琴曲，但很多曲子在音乐上都没有，而且很多音乐的曲子在音乐平台上都是没有的，又或者有些是UP主的天赋，很想下下来，放在耳机里循环欣赏，于是有了这个想法 参考 pangguy&#x2F;bilibiliAudioDownloader-1: 输入视频BV号列表，批量下载B站视频中的音频到本地。 https://github.com/Henryhaohao/Bilibili_video_download https://github.com/SocialSisterYi/bilibili-API-collect  改进原有的代码在2021年最后一次进行更新，我们在现在进行复现，并且随着哔哩哔哩的反爬技术进一步的更新，我们需要进行一些改进，最后在原有的代码基础上，我们将其封装成为exe文件，供没有python环境的音乐爱好者们可以一起欣赏 主要功能输入视频BV号，下载B站视频中的音频到本地。 使用方法在哔站上复制BV号，然后按需要点击下载即可 获取https://github.com/lijiayi-plus/bilibili-audio-downloader-v2 </div></div></div></a><a class="pagination-related" href="/2026/06/28/20%EF%BC%9A%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="20：六月总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-28</div><div class="info-item-2">20：六月总结</div></div><div class="info-2"><div class="info-item-1">时间过得真快，真的在一转眼间，时间又滚过了一个月。我庆幸这个月的时间里，我过得非常的充实，获得了一些成绩，但同时，前路依旧艰险。 相比于上个月，这个月的忙碌就多了一丝从容，从看书开始，到看报，看播客。我感觉找到了我心的位置。不再是四处的奔波了。 很开心的是，现在确实在认真的看书，最让我喜欢的，是《狂喜之后》。这一本书，也许是我在所谓“心灵成长”这个课题上，指引我很久的方向。有很多时候，人类欺骗自己的能力简直和挖掘自身潜力的能力一样强，人类太善于欺骗人类自己了。如果你想要反驳，那么我想给你看看“图灵测试”。如果真的回到那个场景，你会发现里面最大的假设既然是你能不能够欺骗其它的人，非常惊讶的一个fact。 还看了毕英杰的播客，确实是精品，里面关于尼采的解读，很大程度上也是在为我现在的生活“解毒”，里面有太多的误解，在当下。 很喜欢一首歌，哔哩哔哩上面李朕老师的《诀别书》，李朕老师的频道里面很多曲子都很好听，我最喜欢的还是《诀别书》。里面在纯音乐的基础上，改编加上了卓文君的《诀别书》，融于曲子里面，而为这首曲子铺陈了起转。这首曲子，和这个词，成功洗脑了我三天时间：  春华竞芳，五色凌素...</div></div></div></a><a class="pagination-related" href="/2026/09/17/25%EF%BC%9ARTMdet%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="25：RTMdet的基本结构"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-09-17</div><div class="info-item-2">25：RTMdet的基本结构</div></div><div class="info-2"><div class="info-item-1">RTMDet：通用单阶段目标检测器论文：RTMDet: An Empirical Study of Designing Real-Time Object Detectors代码：https:&#x2F;&#x2F; github.com&#x2F;open-mmlab&#x2F;mmdetection&#x2F;tree&#x2F;3.x&#x2F;configs&#x2F;rtmdetRTMDet是一个通用的单阶段目标检测器。通过在主干和颈部的基本构建块中探索大核卷积来提高模型效率，并相应地平衡模型深度、宽度和分辨率。同时进一步探索动态标签分配策略中的软标签以及数据扩充和优化策略的更好组合以提高模型准确性。其架构如图所示： Backbone：CSPDarkNet 基础结构：CSPDarkNet。 核心改进：在基本构建块中引入 5×5 深度卷积，增大有效感受野，提升上下文建模能力，显著提高精度。 多级特征输出：提取 C3、C4、C5 三个尺度的特征，供后续颈部融合。  Neck, CSP-PAFPN 采用与主干相同的基本块（CSP 结构），构建 CSP-PAFPN 进行多级特征融...</div></div></div></a><a class="pagination-related" href="/2026/02/09/0%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇原创博客"><img class="cover" src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-09</div><div class="info-item-2">我的第一篇原创博客</div></div><div class="info-2"><div class="info-item-1">作为一个想要使用hexo在github上搭建自己的主页的小白而言，首先需要搭建好自己的主页，也许以为是markdown的原因，也许我们需要还要搭建一个图床。我相信hexo架构一定是一个不错的选择，以下这一部分就是一个hexo架构搭建的过程。 参考教程：文档 | Hexo 什么是hexohexo是一个快速简洁并且高效的一个博客的框架，使用markdown语言解系文章。 安装安装hexo需要以下的应用程序：  node.js  git  关于Git首先打开powershell，输入git --version,如果有显示版本号，那么我们的程序就是正确安装好了的。 关于node.js我们通过nvs进行安装，首先用管理员身份打开powershell，执行以下的命令：winget install jasongin.nvs,然后就会开始安装。但是在这里有一个坑，就是如果我们直接打开普通的powershell的模式下，我们输入nvs --version 的时候会显示无法执行脚本文件，这是因为powershell的管理模式默认的运行策略是restricted，所以我们需要运行命令，更改运行的模式。...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/4ed03ecef2750292b108ef869e0ccf47.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jiayi Li</div><div class="author-info-description">大二学员一枚，CV学习中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lijiayi-plus"><i class="fab fa-github"></i><span>我的github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Strip-R-CNN-%E8%AE%BA%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">Strip R-CNN 论文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%A7%A3%E5%86%B3%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">网络解决的核心问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2.网络整体结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">实验结果：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/17/26%EF%BC%9A%E6%8C%91%E6%88%98%E6%9D%AF%E5%88%9D%E8%B5%9B%E8%B5%84%E6%96%99-%E6%80%9D%E8%B7%AF/" title="26：挑战杯初赛资料&amp;思路">26：挑战杯初赛资料&amp;思路</a><time datetime="2026-09-17T14:27:32.000Z" title="发表于 2026-09-17 22:27:32">2026-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/17/25%EF%BC%9ARTMdet%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="25：RTMdet的基本结构">25：RTMdet的基本结构</a><time datetime="2026-09-17T14:27:18.000Z" title="发表于 2026-09-17 22:27:18">2026-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/17/24%EF%BC%9Ayolo-26%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="24：yolo-26的基本结构">24：yolo-26的基本结构</a><time datetime="2026-09-17T14:27:06.000Z" title="发表于 2026-09-17 22:27:06">2026-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/17/23%EF%BC%9AStrip-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="23：Strip-net的基本结构">23：Strip-net的基本结构</a><time datetime="2026-09-17T14:26:52.000Z" title="发表于 2026-09-17 22:26:52">2026-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/17/22%EF%BC%9Alsknet%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" title="22：lsknet的基本结构">22：lsknet的基本结构</a><time datetime="2026-09-17T14:26:37.000Z" title="发表于 2026-09-17 22:26:37">2026-09-17</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jiayi Li</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
