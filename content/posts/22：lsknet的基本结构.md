@@ -1,5 +1,5 @@
 ---
-title: "33：lsknet的基本结构"
+title: "31：lsknet的基本结构"
 date: "2026-09-17T22:26:37+08:00"
 slug: "22：lsknet的基本结构"
 tags: ["学习记录"]

@@ -1,5 +1,5 @@
 ---
-title: "17：论文笔记-Frustratingly Simple Few-Shot Object Detection"
+title: "15：论文笔记-Frustratingly Simple Few-Shot Object Detection"
 date: "2026-05-05T20:19:07+08:00"
 slug: "7-论文笔记-Frustratingly-Simple-Few-Shot-Object-Detection"
 tags: ["学习记录"]

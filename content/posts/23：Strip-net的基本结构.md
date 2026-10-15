@@ -1,5 +1,5 @@
 ---
-title: "34：Strip-net的基本结构"
+title: "32：Strip-net的基本结构"
 date: "2026-09-17T22:26:52+08:00"
 slug: "23：Strip-net的基本结构"
 tags: ["学习记录"]

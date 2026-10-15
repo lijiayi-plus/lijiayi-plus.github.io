@@ -1,5 +1,5 @@
 ---
-title: "20：四月总结和vibe coding"
+title: "18：四月总结和vibe coding"
 date: "2026-05-05T21:01:35+08:00"
 slug: "10：四月总结和vibe-coding"
 cover: "https://bucket-plusone.oss-cn-wuhan-lr.aliyuncs.com/img/bf0a873999ea9d67cd3d97ff8ea3b753.jpg"

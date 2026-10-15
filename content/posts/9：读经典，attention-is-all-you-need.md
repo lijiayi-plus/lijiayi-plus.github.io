@@ -1,5 +1,5 @@
 ---
-title: "19：读经典，attention is all you need"
+title: "17：读经典，attention is all you need"
 date: "2026-05-05T20:25:55+08:00"
 slug: "9：读经典，attention-is-all-you-need"
 tags: ["学习记录"]
