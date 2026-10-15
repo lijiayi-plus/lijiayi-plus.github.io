@@ -5,4 +5,4 @@ zh: 系列
 
 ## 一生一芯
 
-{{< series name="一生一芯" desc="从数字逻辑到处理器，再到 RISC-V。按顺序阅读。" >}}
+{{< series name="一生一芯" desc="从minirv到一个真正的risc-v处理器" >}}
