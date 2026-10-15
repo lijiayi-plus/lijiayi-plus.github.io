@@ -54,9 +54,4 @@ disableKinds = ['taxonomy', 'term']
     weight = 40
     [menu.main.params]
       zh = '画廊'
-  [[menu.main]]
-    name = 'About'
-    pageRef = '/about'
-    weight = 50
-    [menu.main.params]
-      zh = '关于'
+

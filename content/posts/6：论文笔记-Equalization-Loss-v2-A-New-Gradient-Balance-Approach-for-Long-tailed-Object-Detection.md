@@ -1,5 +1,5 @@
 ---
-title: "6：论文笔记 Equalization Loss v2   A New Gradient Balance Approach for Long-tailed Object Detection"
+title: "16：论文笔记 Equalization Loss v2   A New Gradient Balance Approach for Long-tailed Object Detection"
 date: "2026-05-05T20:15:48+08:00"
 slug: "6：论文笔记-Equalization-Loss-v2-A-New-Gradient-Balance-Approach-for-Long-tailed-Object-Detection"
 tags: ["学习记录"]

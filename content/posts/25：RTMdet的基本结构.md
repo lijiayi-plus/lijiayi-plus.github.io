@@ -1,5 +1,5 @@
 ---
-title: "25：RTMdet的基本结构"
+title: "36：RTMdet的基本结构"
 date: "2026-09-17T22:27:18+08:00"
 slug: "25：RTMdet的基本结构"
 tags: ["学习记录"]

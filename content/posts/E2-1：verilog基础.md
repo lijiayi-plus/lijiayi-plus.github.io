@@ -1,5 +1,5 @@
 ---
-title: "E2.1：verilog基础"
+title: "42：E2.1 verilog基础"
 date: "2026-10-13T20:18:44+08:00"
 slug: "E2-1：verilog基础"
 series: "一生一芯"

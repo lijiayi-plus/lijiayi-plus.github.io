@@ -1,5 +1,5 @@
 ---
-title: "13：再看 YOLOv4"
+title: "23：再看 YOLOv4"
 date: "2026-05-17T21:30:28+08:00"
 slug: "13：再看yolov4"
 mathjax: true

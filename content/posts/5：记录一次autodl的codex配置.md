@@ -1,5 +1,5 @@
 ---
-title: "5：记录一次autodl的codex配置"
+title: "15：记录一次autodl的codex配置"
 date: "2026-04-30T15:29:30+08:00"
 slug: "5：记录一次autodl的codex配置"
 tags: ["学习记录"]

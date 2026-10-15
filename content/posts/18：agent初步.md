@@ -1,5 +1,5 @@
 ---
-title: "18：agent初步"
+title: "28：agent初步"
 date: "2026-05-24T21:02:42+08:00"
 slug: "18：agent初步"
 tags: ["学习记录"]

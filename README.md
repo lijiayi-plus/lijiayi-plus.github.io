@@ -7,7 +7,6 @@
 ```
 content/
   _index.md            首页
-  about/_index.md      关于
   posts/               文章（唯一的日常写作目录）
   projects/            项目
   series/_index.md     系列（用 {{< series >}} 短代码聚合）
