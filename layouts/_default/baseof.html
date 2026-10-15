@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{{ $title := site.Title }}{{ if not .IsHome }}{{ $title = printf "%s | %s" .Title site.Title }}{{ end }}
+{{ $desc := site.Params.description }}{{ if .IsPage }}{{ $desc = .Summary | plainify | chomp | truncate 140 }}{{ end }}
+<title>{{ $title }}</title>
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+<meta name="description" content="{{ $desc }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:image" content="{{ "og.png" | absURL }}">
+<meta name="twitter:card" content="summary_large_image">
+{{ $v := now.Unix }}
+<link rel="stylesheet" href="{{ "css/main.css" | relURL }}?v={{ $v }}">
+<link rel="stylesheet" href="{{ "css/chroma-light.css" | relURL }}?v={{ $v }}">
+<link rel="stylesheet" href="{{ "css/chroma-dark.css" | relURL }}?v={{ $v }}">
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/442/main/result.css">
+{{ $needsMath := false }}
+{{ if .IsPage }}
+  {{ $rc := .RawContent }}
+  {{ $rc = replaceRE "(?s)```.*?```" "" $rc }}
+  {{ $rc = replaceRE "(?s)~~~.*?~~~" "" $rc }}
+  {{ $rc = replaceRE "`[^`\n]*`" "" $rc }}
+  {{ if or .Params.mathjax (strings.Contains $rc "$") (strings.Contains $rc "\\(") (strings.Contains $rc "\\[") (strings.Contains $rc "\\begin{") }}{{ $needsMath = true }}{{ end }}
+{{ end }}
+{{ if $needsMath }}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">{{ end }}
+{{ with .Site.Home.OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">{{ end }}
+<script>
+(function () {
+    var root = document.documentElement, t, l;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = 'light';
+    root.setAttribute('data-theme', t);
+    try { l = localStorage.getItem('lang'); } catch (e) {}
+    if (l !== 'en' && l !== 'zh') l = 'en';
+    root.setAttribute('data-lang', l);
+    root.lang = l;
+    addEventListener('DOMContentLoaded', function () {
+        var tb = document.getElementById('theme-toggle'), lb = document.getElementById('lang-toggle');
+        var syncTheme = function () {
+            var dark = root.getAttribute('data-theme') === 'dark';
+            if (tb) tb.textContent = l === 'zh' ? (dark ? '深色' : '浅色') : (dark ? 'Dark' : 'Light');
+        };
+        var syncLang = function () { if (lb) lb.textContent = l === 'zh' ? '中' : 'EN'; };
+        syncTheme(); syncLang();
+        if (tb) tb.onclick = function () {
+            t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', t);
+            try { localStorage.setItem('theme', t); } catch (e) {}
+            syncTheme();
+        };
+        if (lb) lb.onclick = function () {
+            l = l === 'zh' ? 'en' : 'zh';
+            root.setAttribute('data-lang', l);
+            root.lang = l;
+            try { localStorage.setItem('lang', l); } catch (e) {}
+            syncTheme(); syncLang();
+        };
+    });
+})();
+</script>
+</head>
+<body class="{{ if .IsHome }}type-home{{ else if eq .Kind "page" }}type-page{{ else }}type-section{{ end }}">
+<header>
+    <div class="overlay">
+        <div class="home"><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></div>
+        <nav>
+            {{ range site.Menus.main }}<a href="{{ .URL }}"><span class="en">{{ .Name }}</span><span class="zh">{{ .Params.zh | default .Name }}</span></a>{{ end }}
+        </nav>
+    </div>
+</header>
+
+{{ block "main" . }}{{ end }}
+
+<footer>
+    <div class="overlay">
+        <button id="theme-toggle" class="theme-toggle" type="button">Light</button>
+        <button id="lang-toggle" class="lang-toggle" type="button">EN</button>
+        <span class="square"></span>
+    </div>
+</footer>
+
+{{ if $needsMath }}
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+addEventListener('DOMContentLoaded', function () {
+    renderMathInElement(document.body, {
+        delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    });
+});
+</script>
+{{ end }}
+
+<script>
+addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.highlight').forEach(function (el) {
+        var code = el.querySelector('code');
+        if (code && code.dataset.lang && code.dataset.lang !== 'plaintext') {
+            var lg = document.createElement('span'); lg.className = 'lang'; lg.textContent = code.dataset.lang; el.appendChild(lg);
+        }
+        var b = document.createElement('button'); b.className = 'copy'; b.type = 'button'; b.textContent = '[copy]';
+        b.onclick = function () { var c = el.querySelector('code'); if (!c) return; navigator.clipboard.writeText(c.innerText).then(function () { b.textContent = '[copied]'; setTimeout(function () { b.textContent = '[copy]' }, 1500); }); };
+        el.appendChild(b);
+    });
+    var lb = document.createElement('div'); lb.id = 'lightbox';
+    var im = document.createElement('img'); lb.appendChild(im); document.body.appendChild(lb);
+    addEventListener('click', function (e) { var t = e.target; if (t.tagName == 'IMG' && t.closest('article') && !t.closest('a')) { im.src = t.currentSrc || t.src; lb.classList.add('on'); } else if (t == lb || t == im) lb.classList.remove('on'); });
+    addEventListener('keydown', function (e) { if (e.key == 'Escape') lb.classList.remove('on'); });
+});
+</script>
+</body>
+</html>

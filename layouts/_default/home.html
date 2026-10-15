@@ -1,0 +1,10 @@
+{{ define "main" }}
+<main role="main">
+    <div class="overlay">
+        <div class="en">{{ .Params.en | markdownify }}</div>
+        <div class="zh">{{ .Content }}</div>
+        <a class="button" href="mailto:{{ site.Params.email }}">Email</a>
+        <a class="button" href="{{ site.Params.github }}">GitHub</a>
+    </div>
+</main>
+{{ end }}
